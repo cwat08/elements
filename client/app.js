@@ -1,9 +1,9 @@
 import React from 'react'
 
-import Html from './components/html'
+import PageContainer from './components/page-container'
 
 const App = () => {
-  return <Html />
+  return <PageContainer />
 }
 
 export default App
