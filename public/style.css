@@ -19,3 +19,25 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+div {
+  display: inline;
+}
+
+h1 {
+  display: inline;
+  font-size: 10pt;
+  color: blue;
+}
+
+.meta {
+  color: red;
+}
+
+.active {
+  background-color: #ffff00;
+}
+
+body:hover {
+  cursor: pointer;
+}
