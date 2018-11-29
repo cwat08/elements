@@ -38,11 +38,15 @@ class PageContainer extends Component {
           handleSubmit={this.handleSubmit}
           searchUrl={this.state.searchUrl}
         />
-        <Html
-          handleClick={this.handleClick}
-          html={this.state.html}
-          activeClass={this.state.activeClass}
-        />
+        {this.state.html.length ? (
+          <div id="html-body">
+            <Html
+              handleClick={this.handleClick}
+              html={this.state.html}
+              activeClass={this.state.activeClass}
+            />
+          </div>
+        ) : null}
       </div>
     )
   }

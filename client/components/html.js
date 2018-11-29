@@ -25,7 +25,7 @@ const Html = props => {
   }
 
   return (
-    <div id="html-body">
+    <div>
       {props.html.map((e, i) => {
         // let idx = e.indexOf('>')
         let idx = i
@@ -33,7 +33,9 @@ const Html = props => {
         return (
           <div
             className={
-              isActive(classname) ? `${classname} active` : {classname}
+              isActive(classname)
+                ? `${classname} active html-element`
+                : `{classname} html-element`
             }
             onClick={props.handleClick}
             name={classname}
