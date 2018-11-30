@@ -20,6 +20,7 @@ class PageContainer extends Component {
 
   async handleClick(evt) {
     await this.setState({activeClass: evt.target.getAttribute('name')})
+    console.log('********')
     console.log(this.state.activeClass)
   }
 

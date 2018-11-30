@@ -31,12 +31,19 @@ h1 {
   color: blue;
 }
 
-.meta {
+/* .meta {
+  color: red;
+} */
+
+.tag {
   color: red;
 }
-
 .active {
   background-color: #ffff00;
+}
+
+.active .html-element {
+  background-color: gray;
 }
 
 body:hover {
@@ -46,7 +53,6 @@ body:hover {
 input {
   height: 30px;
   width: 400px;
-  /* border-radius: 5px 0 0 5px; */
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
   border-right: 0px solid;
@@ -63,7 +69,7 @@ input {
   margin: 20px auto 20px auto;
   padding: 5px;
   width: 90vw;
-  height: 100vh;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -153,11 +159,10 @@ pre {
   justify-content: center;
 }
 
-/* .select {
-  /* height: 10px; */
-/* width: 60px;
-  border-radius: 0; */
-/* } */
+.select {
+  padding: 1px;
+}
+
 .search_categories {
   font-size: 13px;
   padding: 6px 5px 6px 5px;

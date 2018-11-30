@@ -9,50 +9,87 @@ const Html = props => {
   }
 
   const getTagName = str => {
+    const elementObj = {tag: null, element: '', type: null}
     const a = str.indexOf('>')
     const b = str.indexOf('/')
     const c = str.indexOf(' ')
     const d = str.indexOf('\n')
+    const arr = [a, b, c, d]
+    const filtered = arr.filter(n => n >= 0)
+    const idx = Math.min(...filtered)
+    //check if it's a closing tag
     if (str[1] === '/') {
-      const newStr = str.slice(2, a)
-      // console.log(newStr)
-      return newStr
+      elementObj.tag = str.slice(2, a)
+      elementObj.closing = str.slice(a)
+      elementObj.type = 'closing'
+      //check if it's a self-closing tag
+    } else if (b === str.length - 3) {
+      elementObj.tag = str.slice(2, idx)
+      elementObj.element = str.slice(idx, str.length - 2)
+      elementObj.closing = '/>'
+      elementObj.type = 'self-closing'
+      //lastly it would be an opening tag
     } else {
-      const arr = [a, b, c, d]
-      const filtered = arr.filter(n => n >= 0)
-      const idx = Math.min(...filtered)
-      return str.slice(1, idx)
+      elementObj.tag = str.slice(1, idx)
+      elementObj.element = str.slice(idx + 1)
+      elementObj.type = 'opening'
+      elementObj.closing = '>'
     }
+    return elementObj
   }
-
+  // const html = ['<div> Some text here', '</div>']
+  //return idx of end of tag
+  //create two divs
+  //first is tag div which would be e.slice(1, idx)
+  //second would be element div which would be e.slice(idx +1)
   return (
     <div>
-      {/* <pre> */}
-      {/* {'\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0'} */}
-      {props.html.map((e, i) => {
-        // let idx = e.indexOf('>')
-        let idx = i
-        let classname = getTagName(e)
-        return (
-          <div
-            className={
-              isActive(classname)
-                ? `${classname} active html-element`
-                : `{classname} html-element`
-            }
-            onClick={props.handleClick}
-            name={classname}
-            key={idx}
-          >
-            {e}
-            <br />
-          </div>
-        )
-      })}
-      {/* </pre> */}
+      <pre>
+        {/* <pre> */}
+        {/* {'\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0'} */}
+        {props.html.map((e, i) => {
+          // let idx = e.indexOf('>')
+          const idx = i
+          const htmlObject = getTagName(e)
+          //console.log(htmlObject)
+          const tag = htmlObject.tag
+          //console.log(tag)
+          const element = htmlObject.element
+          const closing = htmlObject.closing
+          const type = htmlObject.type
+
+          return (
+            <div key={idx}>
+              <div
+                className={
+                  isActive(tag)
+                    ? `${tag} active html-element`
+                    : `${tag} html-element`
+                }
+              >
+                {type === 'closing' ? '</' : '<'}
+                <div
+                  className={isActive(tag) ? `${tag} active tag` : `${tag} tag`}
+                  name={tag}
+                  onClick={props.handleClick}
+                >
+                  {tag}
+                </div>
+                {type === 'self-closing'
+                  ? `${element}${closing}`
+                  : `${closing}${element}`}
+              </div>
+            </div>
+          )
+        })}
+      </pre>
     </div>
   )
 }
+
+//<div>Something </div>
+//div className =
+//wrap tags in another div and then give it an additiona class name element and give tage classname tag
 
 // createMarkup() {
 //   return {
@@ -114,3 +151,31 @@ const Html = props => {
 //
 
 export default Html
+
+/////</div>
+
+////    <div
+// className={
+//   isActive(className)
+//     ? `${className} active tag`
+//     : `${className} tag`
+// }
+// onClick={props.handleClick}
+// name={className}
+// key={idx}
+// >
+// {tag}
+// </div>
+// <div className="html-element">{element}</div>
+
+// {/* <div
+// className={
+//   isActive(tagName)
+//     ? `${tagName} active html-element`
+//     : `${tagName} html-element`
+// }
+// >
+// {element}
+// </div> */}
+// <br />
+// </div>
