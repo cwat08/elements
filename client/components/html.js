@@ -46,6 +46,12 @@ const Html = props => {
       elementObj.tagInfo = str.slice(idx, a)
       //tag info is everything after tag before >
     }
+    //check to see if it is an 'empty' tag (contains symbols or numbers) and classify as such
+    const regex = /[0-9]|[@#$%^&*()_+\[\]{};:\\|,.\/?]/g
+    if (elementObj.tag.search(regex) > -1) {
+      elementObj.tagInfo = elementObj.tag
+      elementObj.tag = ''
+    }
     return elementObj
   }
   // const html = ['<div> Some text here', '</div>']
