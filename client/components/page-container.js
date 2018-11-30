@@ -27,12 +27,13 @@ class PageContainer extends Component {
     evt.preventDefault()
     const url = this.state.searchUrl
     const protocol = this.state.protocol
+    this.setState({invalidSearch: false})
     const results = await axios.get(`/api/fetch/${protocol}/${url}`)
     if (results.data === 'error') {
       this.setState({invalidSearch: true})
       console.log(this.state.invalidSearch)
     } else {
-      this.setState({html: results.data, activeClass: '', invalidSearch: false})
+      this.setState({html: results.data, activeClass: ''})
     }
   }
 
@@ -47,15 +48,17 @@ class PageContainer extends Component {
   render() {
     return (
       <div id="page-container">
-        <SearchBar
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-          searchUrl={this.state.searchUrl}
-          handleSelect={this.handleSelect}
-        />
-        {this.state.invalidSearch ? (
-          <div className="error-message">Please enter a valid url</div>
-        ) : null}
+        <div id="search-bar-container">
+          <SearchBar
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+            searchUrl={this.state.searchUrl}
+            handleSelect={this.handleSelect}
+          />
+          {this.state.invalidSearch ? (
+            <div className="error-message">Please enter a valid url</div>
+          ) : null}
+        </div>
         {this.state.html.length ? (
           <div id="html-body">
             <Html

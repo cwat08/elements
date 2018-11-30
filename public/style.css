@@ -128,8 +128,14 @@ pre {
 .error-message {
   color: red;
   font-size: 11pt;
-  /* text-align: center; */
   margin: auto;
+  padding: 10px;
   display: block;
   font-weight: 200;
+}
+
+#search-bar-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
