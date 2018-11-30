@@ -9,7 +9,13 @@ const Html = props => {
   }
 
   const getTagName = str => {
-    const elementObj = {tag: null, element: '', type: null}
+    const elementObj = {
+      tag: null,
+      element: '',
+      type: null,
+      closing: '',
+      tagInfo: ''
+    }
     const a = str.indexOf('>')
     const b = str.indexOf('/')
     const c = str.indexOf(' ')
@@ -22,18 +28,23 @@ const Html = props => {
       elementObj.tag = str.slice(2, a)
       elementObj.closing = str.slice(a)
       elementObj.type = 'closing'
+
       //check if it's a self-closing tag
-    } else if (b === str.length - 3) {
-      elementObj.tag = str.slice(2, idx)
-      elementObj.element = str.slice(idx, str.length - 2)
+    } else if (b === str.length - 2) {
+      elementObj.tag = str.slice(1, idx)
+      elementObj.tagInfo = str.slice(idx, str.length - 2)
       elementObj.closing = '/>'
       elementObj.type = 'self-closing'
+
+      //tag info is everything after tag before closing
       //lastly it would be an opening tag
     } else {
       elementObj.tag = str.slice(1, idx)
-      elementObj.element = str.slice(idx + 1)
+      elementObj.element = str.slice(a + 1)
       elementObj.type = 'opening'
       elementObj.closing = '>'
+      elementObj.tagInfo = str.slice(idx, a)
+      //tag info is everything after tag before >
     }
     return elementObj
   }
@@ -57,6 +68,7 @@ const Html = props => {
           const element = htmlObject.element
           const closing = htmlObject.closing
           const type = htmlObject.type
+          const tagInfo = htmlObject.tagInfo
 
           return (
             <div key={idx}>
@@ -76,8 +88,8 @@ const Html = props => {
                   {tag}
                 </div>
                 {type === 'self-closing'
-                  ? `${element}${closing}`
-                  : `${closing}${element}`}
+                  ? `${tagInfo}${closing}`
+                  : `${tagInfo}${closing}${element}`}
               </div>
             </div>
           )
