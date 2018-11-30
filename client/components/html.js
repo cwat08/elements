@@ -26,7 +26,8 @@ const Html = props => {
   }
 
   return (
-    <pre>
+    <div>
+      {/* <pre> */}
       {/* {'\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0'} */}
       {props.html.map((e, i) => {
         // let idx = e.indexOf('>')
@@ -48,7 +49,8 @@ const Html = props => {
           </div>
         )
       })}
-    </pre>
+      {/* </pre> */}
+    </div>
   )
 }
 

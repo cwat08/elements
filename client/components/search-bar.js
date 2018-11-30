@@ -14,7 +14,13 @@ class Search extends Component {
     return (
       <div>
         <form id="search-bar">
-          <div id="https">https:// </div>
+          {/* <div id="https">https:// </div> */}
+          <select onChange={this.props.handleSelect}>
+            <option slected="selected" value="https">
+              https://
+            </option>
+            <option value="http">http://</option>
+          </select>
           <input
             name="search"
             value={this.props.searchUrl}

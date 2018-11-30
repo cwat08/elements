@@ -9,11 +9,13 @@ class PageContainer extends Component {
       activeClass: '',
       html: [],
       searchUrl: '',
-      invalidSearch: false
+      invalidSearch: false,
+      protocol: 'https'
     }
     this.handleClick = this.handleClick.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.handleSelect = this.handleSelect.bind(this)
   }
 
   async handleClick(evt) {
@@ -24,17 +26,22 @@ class PageContainer extends Component {
   async handleSubmit(evt) {
     evt.preventDefault()
     const url = this.state.searchUrl
-    const results = await axios.get(`/api/fetch/${url}`)
+    const protocol = this.state.protocol
+    const results = await axios.get(`/api/fetch/${protocol}/${url}`)
     if (results.data === 'error') {
       this.setState({invalidSearch: true})
       console.log(this.state.invalidSearch)
     } else {
-      this.setState({html: results.data, activeClass: ''})
+      this.setState({html: results.data, activeClass: '', invalidSearch: false})
     }
   }
 
   handleChange(evt) {
     this.setState({searchUrl: evt.target.value})
+  }
+  async handleSelect(evt) {
+    await this.setState({protocol: evt.target.value})
+    console.log(this.state.protocol)
   }
 
   render() {
@@ -44,9 +51,10 @@ class PageContainer extends Component {
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
           searchUrl={this.state.searchUrl}
+          handleSelect={this.handleSelect}
         />
         {this.state.invalidSearch ? (
-          <h6 className="error-message">Please enter a valid url</h6>
+          <div className="error-message">Please enter a valid url</div>
         ) : null}
         {this.state.html.length ? (
           <div id="html-body">

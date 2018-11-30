@@ -70,6 +70,7 @@ input {
 .html-element {
   padding-left: 10px;
   overflow-wrap: break-word;
+  font-family: monospace;
 }
 
 /* #page-container {
@@ -127,8 +128,8 @@ pre {
 .error-message {
   color: red;
   font-size: 11pt;
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
+  /* text-align: center; */
+  margin: auto;
+  display: block;
   font-weight: 200;
 }

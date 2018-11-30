@@ -3,9 +3,14 @@ const axios = require('axios')
 module.exports = router
 
 //router.use('/users', require('./users'))
-router.get('/fetch/:searchUrl', async (req, res, next) => {
+router.get('/fetch/:protocol/:searchUrl', async (req, res, next) => {
   try {
-    const results = await axios.get(`http://${req.params.searchUrl}`)
+    const results = await axios.get(
+      req.params.protocol === 'https'
+        ? `https://${req.params.searchUrl}`
+        : `http://${req.params.searchUrl}`
+    )
+    // const results = await axios.get(`${req.params.searchUrl}`)
     if (results.data === null) {
       res.send(null)
     }
