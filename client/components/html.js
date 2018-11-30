@@ -4,7 +4,7 @@ import React from 'react'
 const Html = props => {
   const isActive = str => {
     const a = props.activeClass === str
-    console.log(a)
+    //console.log(a)
     return a
   }
 
@@ -12,12 +12,13 @@ const Html = props => {
     const a = str.indexOf('>')
     const b = str.indexOf('/')
     const c = str.indexOf(' ')
+    const d = str.indexOf('\n')
     if (str[1] === '/') {
       const newStr = str.slice(2, a)
       // console.log(newStr)
       return newStr
     } else {
-      const arr = [a, b, c]
+      const arr = [a, b, c, d]
       const filtered = arr.filter(n => n >= 0)
       const idx = Math.min(...filtered)
       return str.slice(1, idx)
@@ -25,7 +26,8 @@ const Html = props => {
   }
 
   return (
-    <div>
+    <pre>
+      {/* {'\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0'} */}
       {props.html.map((e, i) => {
         // let idx = e.indexOf('>')
         let idx = i
@@ -46,7 +48,7 @@ const Html = props => {
           </div>
         )
       })}
-    </div>
+    </pre>
   )
 }
 
