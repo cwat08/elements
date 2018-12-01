@@ -7,7 +7,7 @@ const Html = props => {
     //console.log(a)
     return a
   }
-
+  let prevTag = ''
   const getTagName = str => {
     const elementObj = {
       tag: null,
@@ -48,9 +48,12 @@ const Html = props => {
     }
     //check to see if it is an 'empty' tag (contains symbols or numbers) and classify as such
     const regex = /[0-9]|[@#$%^&*()_+\[\]{};:\\|,.\/?]/g
-    if (elementObj.tag.search(regex) > -1) {
+    if (elementObj.tag.search(regex) > -1 || elementObj.tag === '') {
       elementObj.tagInfo = elementObj.tag
-      elementObj.tag = ''
+      elementObj.tag = prevTag
+      console.log(elementObj)
+    } else {
+      prevTag = elementObj.tag
     }
     return elementObj
   }

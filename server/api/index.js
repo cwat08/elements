@@ -1,8 +1,26 @@
 const router = require('express').Router()
 const axios = require('axios')
+const {Website} = require('../db/models')
 module.exports = router
 
 //router.use('/users', require('./users'))
+router.get('/surprise', async (req, res, next) => {
+  try {
+    const site = await Website.findById(4)
+
+    const results = await axios.get(`https://${site.url}`)
+    //make into new function to stay D.R.Y.
+    const htmlArr = results.data
+      .split('<')
+      .map(e => {
+        return `<${e}`
+      })
+      .slice(1)
+    res.send(htmlArr)
+  } catch (err) {
+    console.log(err.message)
+  }
+})
 router.get('/fetch/:protocol/:searchUrl', async (req, res, next) => {
   try {
     const results = await axios.get(

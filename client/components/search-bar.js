@@ -12,23 +12,24 @@ class Search extends Component {
   // }
   render() {
     return (
-      <div id="search-bar">
-        <div className="search_categories">
-          <div className="select">
-            <select
-              name="search_categories"
-              id="search_categories"
-              onChange={this.props.handleSelect}
-            >
-              <option value="https" selected="selected">
-                https://
-              </option>
-              <option value="http">http://</option>
-            </select>
+      <div id="search-bar-container">
+        <div id="search-bar">
+          <div className="search_categories">
+            <div className="select">
+              <select
+                name="search_categories"
+                id="search_categories"
+                onChange={this.props.handleSelect}
+              >
+                <option value="https" selected="selected">
+                  https://
+                </option>
+                <option value="http">http://</option>
+              </select>
+            </div>
           </div>
-        </div>
-        <form>
-          {/* <div className="search-categories">
+          <form>
+            {/* <div className="search-categories">
             <div className="select">
               <select
                 name={'search-categories'}
@@ -42,17 +43,27 @@ class Search extends Component {
               </select>
             </div>
           </div> */}
-          <input
-            name="search"
-            value={this.props.searchUrl}
-            onChange={this.props.handleChange}
-          />
+            <input
+              name="search"
+              value={this.props.searchUrl}
+              onChange={this.props.handleChange}
+            />
 
-          <button type="submit" onClick={this.props.handleSubmit}>
-            Submit
+            <button type="submit" onClick={this.props.handleSubmit}>
+              Submit
+            </button>
+          </form>
+          {/* <Select /> */}
+        </div>
+        <form id="surprise-me-container">
+          <button
+            id="surprise-me"
+            type="button"
+            onClick={this.props.handleSurprise}
+          >
+            Surprise Me!
           </button>
         </form>
-        {/* <Select /> */}
       </div>
     )
   }
