@@ -45,7 +45,7 @@ class Search extends Component {
           </div> */}
             <input
               name="search"
-              value={this.props.searchUrl}
+              value={this.props.searchInput}
               onChange={this.props.handleChange}
             />
 

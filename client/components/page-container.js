@@ -10,6 +10,7 @@ class PageContainer extends Component {
       activeClass: '',
       html: [],
       searchUrl: '',
+      searchInput: '',
       invalidSearch: false,
       protocol: 'https',
       loading: false
@@ -23,8 +24,6 @@ class PageContainer extends Component {
 
   async handleClick(evt) {
     await this.setState({activeClass: evt.target.getAttribute('name')})
-    console.log('********')
-    console.log(this.state.activeClass)
   }
 
   async handleSurprise() {
@@ -44,21 +43,27 @@ class PageContainer extends Component {
 
   async handleSubmit(evt) {
     evt.preventDefault()
-    const url = this.state.searchUrl
+    const url = this.state.searchInput
     const protocol = this.state.protocol
     this.setState({invalidSearch: false, loading: true, html: []})
     const results = await axios.get(`/api/fetch/${protocol}/${url}`)
     if (results.data === 'error') {
       this.setState({invalidSearch: true, loading: false})
-      console.log(this.state.invalidSearch)
     } else {
-      this.setState({html: results.data, activeClass: '', loading: false})
+      this.setState({
+        html: results.data,
+        searchUrl: url,
+        searchInput: '',
+        activeClass: '',
+        loading: false
+      })
     }
   }
 
   handleChange(evt) {
-    this.setState({searchUrl: evt.target.value})
+    this.setState({searchInput: evt.target.value})
   }
+
   async handleSelect(evt) {
     await this.setState({protocol: evt.target.value})
     console.log(this.state.protocol)
@@ -72,7 +77,7 @@ class PageContainer extends Component {
             <SearchBar
               handleChange={this.handleChange}
               handleSubmit={this.handleSubmit}
-              searchUrl={this.state.searchUrl}
+              searchInput={this.state.searchInput}
               handleSelect={this.handleSelect}
               handleSurprise={this.handleSurprise}
             />
