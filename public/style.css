@@ -1,6 +1,9 @@
 body {
-  font-family: sans-serif;
-  background-color: #dfe6e9;
+  font-family: 'Lato', arial, sans-serif;
+  /* background-color: #dfe6e9; */
+  background-color: #ffe6c9;
+  letter-spacing: 0.03em;
+  color: #363c47;
 }
 
 a {
@@ -61,6 +64,9 @@ input {
   margin-left: 0;
   margin-top: 1px;
   padding-left: 10px;
+  letter-spacing: 0.08em;
+  color: #363c47;
+  font-family: 'Lato', arial, sans-serif;
 }
 
 #html-body {
@@ -91,7 +97,8 @@ input {
 
 button {
   height: 34px;
-  width: 60px;
+  width: 70px;
+  letter-spacing: 0.04em;
   border-radius: 0 5px 5px 0;
   font-size: 10pt;
   background-color: #1174db;
@@ -124,8 +131,9 @@ button:hover {
   width: 60px;
   background-color: white;
   text-align: center;
-  font-size: 13pt;
+
   margin-right: 0;
+  /* letter-spacing: 0.2em; */
 }
 
 /* .tab {
@@ -165,6 +173,7 @@ pre {
 
 .search_categories {
   font-size: 13px;
+
   padding: 6px 5px 6px 5px;
   background: #fff;
   border: 1px solid #ccc;
@@ -322,3 +331,8 @@ pre {
 /* #button {
   width: 100;
 } */
+
+#page-name {
+  font-size: 14pt;
+  font-weight: 575;
+}

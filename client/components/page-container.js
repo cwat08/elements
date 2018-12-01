@@ -31,7 +31,12 @@ class PageContainer extends Component {
     try {
       this.setState({loading: true, invalidSearch: false, html: []})
       const results = await axios.get('/api/surprise')
-      this.setState({html: results.data, activeClass: '', loading: false})
+      this.setState({
+        html: results.data.html,
+        searchUrl: results.data.url,
+        activeClass: '',
+        loading: false
+      })
     } catch (err) {
       console.log(err.message)
     }
@@ -79,12 +84,21 @@ class PageContainer extends Component {
 
         {this.state.loading ? <Loader /> : null}
         {this.state.html.length ? (
-          <div id="html-body">
-            <Html
-              handleClick={this.handleClick}
-              html={this.state.html}
-              activeClass={this.state.activeClass}
-            />
+          <div id="html-container">
+            <div id="page-name">
+              SOURCE CODE FOR:{' '}
+              <a href={`https://${this.state.searchUrl}`} target="_blank">{`${
+                this.state.searchUrl
+              }`}</a>
+            </div>
+
+            <div id="html-body">
+              <Html
+                handleClick={this.handleClick}
+                html={this.state.html}
+                activeClass={this.state.activeClass}
+              />
+            </div>
           </div>
         ) : null}
       </div>

@@ -20,7 +20,11 @@ async function seed() {
     Website.create({url: 'www.twitter.com'}),
     Website.create({url: 'www.apple.com'}),
     Website.create({url: 'www.theonion.com'}),
-    Website.create({url: 'www.digg.com'})
+    Website.create({url: 'www.digg.com'}),
+    Website.create({url: 'www.google.com/finance'}),
+    Website.create({url: 'www.nike.com/us/en_us/'}),
+    Website.create({url: 'xkcd.com'}),
+    Website.create({url: 'www.amazon.com'})
   ])
   console.log(`seeded ${websites.length} websites`)
   console.log(`seeded successfully`)
