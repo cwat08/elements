@@ -72,7 +72,7 @@ input {
 #html-body {
   background-color: #f1f2f6;
   /* display: block; */
-  margin: 60px auto 20px auto;
+  margin: 15px auto 20px auto;
   padding: 25px;
   width: 90vw;
   overflow-y: auto;
@@ -156,7 +156,7 @@ pre {
   color: red;
   font-size: 11pt;
   margin: auto;
-  padding: 10px;
+  padding: 5px;
   display: block;
   font-weight: 200;
 }
@@ -302,11 +302,6 @@ pre {
   }
 } */
 
-#surprise-me {
-  width: 150px;
-  border-radius: 5px;
-}
-
 /* #top-container {
   display: flex;
   flex-direction: column;
@@ -322,10 +317,46 @@ pre {
 } */
 
 #surprise-me-container {
-  display: flex;
-  justify-content: center;
+  /* display: flex; */
+  /* justify-content: center; */
   width: 100vw;
-  margin-top: 15px;
+  margin-top: 30px;
+}
+
+#buttons-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: 20vh;
+}
+
+/* #buttons-form {
+  display: inline-block;
+} */
+#surprise-me {
+  width: 150px;
+  border-radius: 5px;
+  /* margin-left: 100px; */
+  padding: 25px;
+  display: inline-block;
+}
+
+#submit {
+  /* margin-left: 25px; */
+  /* margin-right: 100px; */
+  /* margin-left: 0; */
+  /*padding: 25px; */
+  display: inline-block;
+}
+
+#submit-container {
+  margin: 25px;
+}
+
+#surprise-me-container {
+  margin: 25px;
+  padding: 25px;
 }
 
 /* #button {
@@ -333,6 +364,9 @@ pre {
 } */
 
 #page-name {
-  font-size: 14pt;
+  font-size: 18pt;
   font-weight: 575;
+  padding-top: 70px;
+  padding-left: 50px;
+  display: block;
 }

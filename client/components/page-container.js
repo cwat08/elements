@@ -3,11 +3,12 @@ import SearchBar from './search-bar'
 import Html from './html'
 import axios from 'axios'
 import Loader from './loader'
+import Buttons from './buttons'
 class PageContainer extends Component {
   constructor() {
     super()
     this.state = {
-      activeClass: '',
+      activeTag: '',
       html: [],
       searchUrl: '',
       searchInput: '',
@@ -23,7 +24,7 @@ class PageContainer extends Component {
   }
 
   async handleClick(evt) {
-    await this.setState({activeClass: evt.target.getAttribute('name')})
+    await this.setState({activeTag: evt.target.getAttribute('name')})
   }
 
   async handleSurprise() {
@@ -33,7 +34,7 @@ class PageContainer extends Component {
       this.setState({
         html: results.data.html,
         searchUrl: results.data.url,
-        activeClass: '',
+        activeTag: '',
         loading: false
       })
     } catch (err) {
@@ -54,7 +55,7 @@ class PageContainer extends Component {
         html: results.data,
         searchUrl: url,
         searchInput: '',
-        activeClass: '',
+        activeTag: '',
         loading: false
       })
     }
@@ -82,16 +83,29 @@ class PageContainer extends Component {
               handleSurprise={this.handleSurprise}
             />
           </div>
+          {/* <form id="surprise-me-container">
+            <button
+              id="surprise-me"
+              type="button"
+              onClick={this.handleSurprise}
+            >
+              Surprise Me!
+            </button>
+          </form> */}
           {this.state.invalidSearch ? (
             <div className="error-message">Please enter a valid url</div>
           ) : null}
         </div>
+        <Buttons
+          handleSubmit={this.handleSubmit}
+          handleSurprise={this.handleSurprise}
+        />
 
         {this.state.loading ? <Loader /> : null}
         {this.state.html.length ? (
           <div id="html-container">
             <div id="page-name">
-              SOURCE CODE FOR:{' '}
+              <div>SOURCE CODE FOR: </div>
               <a href={`https://${this.state.searchUrl}`} target="_blank">{`${
                 this.state.searchUrl
               }`}</a>
@@ -101,7 +115,7 @@ class PageContainer extends Component {
               <Html
                 handleClick={this.handleClick}
                 html={this.state.html}
-                activeClass={this.state.activeClass}
+                activeTag={this.state.activeTag}
               />
             </div>
           </div>

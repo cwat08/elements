@@ -1,27 +1,45 @@
 import React from 'react'
 // import {connect} from 'react-router'
-
+//!!!!!!make into smart component to add prev tag to state
+//create functions to handle each case of tag name?s
 const Html = props => {
-  const isActive = str => {
-    const a = props.activeClass === str
-    //console.log(a)
-    return a
-  }
   let prevTag = ''
+
+  const isActive = tag => {
+    return props.activeTag === tag
+  }
+
+  // const getIndices = str => {
+  //   let a
+  //   let b
+  //   let c
+  //   let d
+  //   for (let i = 0; i < str.length; i++) {
+  //     if (str[i] === '>') a = i
+  //     if (str[i] === '/') b = i
+  //     if (str[i] === ' ') c = i
+  //     if (str[i] === '\n') d = i
+  //   }
+  //   return {a, b, c, d}
+  // }
+
   const getTagName = str => {
     const elementObj = {
       tag: null,
       element: '',
       type: null,
       closing: '',
-      tagInfo: ''
+      tagInfo: '',
+      inheritTag: false
     }
     const a = str.indexOf('>')
     const b = str.indexOf('/')
     const c = str.indexOf(' ')
     const d = str.indexOf('\n')
-    const arr = [a, b, c, d]
-    const filtered = arr.filter(n => n >= 0)
+    const indicesArr = [a, b, c, d]
+    //const indicesObj = this.getIndices(str)
+    //const indicesArr = [indicesObj.a, indicesObj.b, indicesObj.c, indicesObj.d]
+    const filtered = indicesArr.filter(n => n >= 0)
     const idx = Math.min(...filtered)
     //check if it's a closing tag
     if (str[1] === '/') {
@@ -51,7 +69,8 @@ const Html = props => {
     if (elementObj.tag.search(regex) > -1 || elementObj.tag === '') {
       elementObj.tagInfo = elementObj.tag
       elementObj.tag = prevTag
-      console.log(elementObj)
+      elementObj.inheritTag = true
+      // console.log(elementObj)
     } else {
       prevTag = elementObj.tag
     }
@@ -62,22 +81,19 @@ const Html = props => {
   //create two divs
   //first is tag div which would be e.slice(1, idx)
   //second would be element div which would be e.slice(idx +1)
+
   return (
     <div>
       <pre>
-        {/* <pre> */}
-        {/* {'\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0'} */}
         {props.html.map((e, i) => {
-          // let idx = e.indexOf('>')
           const idx = i
           const htmlObject = getTagName(e)
-          //console.log(htmlObject)
           const tag = htmlObject.tag
-          //console.log(tag)
           const element = htmlObject.element
           const closing = htmlObject.closing
           const type = htmlObject.type
           const tagInfo = htmlObject.tagInfo
+          const inheritTag = htmlObject.inheritTag
 
           return (
             <div key={idx}>
@@ -89,17 +105,22 @@ const Html = props => {
                 }
               >
                 {type === 'closing' ? '</' : '<'}
-                <div
-                  className={isActive(tag) ? `${tag} active tag` : `${tag} tag`}
-                  name={tag}
-                  onClick={props.handleClick}
-                >
-                  {tag}
-                </div>
+                {inheritTag ? null : (
+                  <div
+                    className={
+                      isActive(tag) ? `${tag} active tag` : `${tag} tag`
+                    }
+                    name={tag}
+                    onClick={props.handleClick}
+                  >
+                    {tag}
+                  </div>
+                )}
                 {type === 'self-closing'
                   ? `${tagInfo}${closing}`
                   : `${tagInfo}${closing}${element}`}
               </div>
+              <br />
             </div>
           )
         })}

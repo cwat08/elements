@@ -21,7 +21,7 @@ class Search extends Component {
                 id="search_categories"
                 onChange={this.props.handleSelect}
               >
-                <option value="https" selected="selected">
+                <option value="https" defaultValue="selected">
                   https://
                 </option>
                 <option value="http">http://</option>
@@ -49,13 +49,13 @@ class Search extends Component {
               onChange={this.props.handleChange}
             />
 
-            <button type="submit" onClick={this.props.handleSubmit}>
+            {/* <button type="submit" onClick={this.props.handleSubmit}>
               Submit
-            </button>
+            </button> */}
           </form>
           {/* <Select /> */}
         </div>
-        <form id="surprise-me-container">
+        {/* <form id="surprise-me-container">
           <button
             id="surprise-me"
             type="button"
@@ -63,7 +63,7 @@ class Search extends Component {
           >
             Surprise Me!
           </button>
-        </form>
+        </form> */}
       </div>
     )
   }
