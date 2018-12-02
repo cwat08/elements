@@ -29,44 +29,26 @@ class Search extends Component {
             </div>
           </div>
           <form>
-            {/* <div className="search-categories">
-            <div className="select">
-              <select
-                name={'search-categories'}
-                id="search-categoris"
-                onChange={this.props.handleSelect}
-              >
-                <option slected="selected" value="https">
-                  https://
-                </option>
-                <option value="http">http://</option>
-              </select>
-            </div>
-          </div> */}
             <input
               name="search"
               value={this.props.searchInput}
               onChange={this.props.handleChange}
             />
-
             <button type="submit" onClick={this.props.handleSubmit}>
               Submit
             </button>
           </form>
-          {/* <Select /> */}
         </div>
         {this.props.invalidSearch ? (
           <div className="error-message">Please enter a valid url</div>
         ) : null}
-        <form id="surprise-me-container">
-          <button
-            id="surprise-me"
-            type="button"
-            onClick={this.props.handleSurprise}
-          >
-            Surprise Me!
-          </button>
-        </form>
+        {/* <div id="surprise-me-container"> */}
+        {/* <form id="surprise-me-container"> */}
+        <div id="surprise-me" onClick={this.props.handleSurprise}>
+          SURPRISE ME!
+        </div>
+        {/* </form> */}
+        {/* </div> */}
       </div>
     )
   }

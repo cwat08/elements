@@ -80,18 +80,17 @@ class PageContainer extends Component {
   render() {
     return (
       <div id="page-container">
-        <div className="search-bar-container">
-          <div>
-            <SearchBar
-              handleChange={this.handleChange}
-              handleSubmit={this.handleSubmit}
-              searchInput={this.state.searchInput}
-              handleSelect={this.handleSelect}
-              handleSurprise={this.handleSurprise}
-              invalidSearch={this.state.invalidSearch}
-            />
-          </div>
-          {/* <form id="surprise-me-container">
+        <div>
+          <SearchBar
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+            searchInput={this.state.searchInput}
+            handleSelect={this.handleSelect}
+            handleSurprise={this.handleSurprise}
+            invalidSearch={this.state.invalidSearch}
+          />
+        </div>
+        {/* <form id="surprise-me-container">
             <button
               id="surprise-me"
               type="button"
@@ -100,10 +99,10 @@ class PageContainer extends Component {
               Surprise Me!
             </button>
           </form> */}
-          {/* {this.state.invalidSearch ? (
+        {/* {this.state.invalidSearch ? (
             <div className="error-message">Please enter a valid url</div>
           ) : null} */}
-        </div>
+
         {/* <Buttons
           handleSubmit={this.handleSubmit}
           handleSurprise={this.handleSurprise}
