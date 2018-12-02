@@ -3,7 +3,7 @@ import SearchBar from './search-bar'
 import Html from './html'
 import axios from 'axios'
 import Loader from './loader'
-import Buttons from './buttons'
+
 class PageContainer extends Component {
   constructor() {
     super()
@@ -30,7 +30,7 @@ class PageContainer extends Component {
   async handleSurprise() {
     try {
       this.setState({loading: true, invalidSearch: false, html: []})
-      const results = await axios.get('/api/surprise')
+      const results = await axios.get('/api/search/surprise')
       this.setState({
         html: results.data.html,
         searchUrl: results.data.url,
@@ -51,7 +51,7 @@ class PageContainer extends Component {
         const url = this.state.searchInput
         const protocol = this.state.protocol
         this.setState({invalidSearch: false, loading: true, html: []})
-        const results = await axios.get(`/api/fetch/${protocol}/${url}`)
+        const results = await axios.get(`/api/search/${protocol}/${url}`)
         if (results.data === 'Invalid Url') {
           this.setState({invalidSearch: true, loading: false})
         } else {
@@ -74,7 +74,6 @@ class PageContainer extends Component {
 
   async handleSelect(evt) {
     await this.setState({protocol: evt.target.value})
-    console.log(this.state.protocol)
   }
 
   render() {
@@ -90,25 +89,6 @@ class PageContainer extends Component {
             invalidSearch={this.state.invalidSearch}
           />
         </div>
-        {/* <form id="surprise-me-container">
-            <button
-              id="surprise-me"
-              type="button"
-              onClick={this.handleSurprise}
-            >
-              Surprise Me!
-            </button>
-          </form> */}
-        {/* {this.state.invalidSearch ? (
-            <div className="error-message">Please enter a valid url</div>
-          ) : null} */}
-
-        {/* <Buttons
-          handleSubmit={this.handleSubmit}
-          handleSurprise={this.handleSurprise}
-          handleKeyDown={this.handleKeyDown}
-        /> */}
-
         {this.state.loading ? <Loader /> : null}
         {this.state.html.length ? (
           <div id="html-container">

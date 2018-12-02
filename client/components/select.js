@@ -4,13 +4,15 @@ const Select = props => {
   return (
     <div className="search_categories">
       <div className="select">
-        <select name="search_categories" id="search_categories">
-          <option value="1" selected="selected">
-            Happy
+        <select
+          name="search_categories"
+          id="search_categories"
+          onChange={props.handleSelect}
+        >
+          <option value="https" defaultValue="selected">
+            https://
           </option>
-          <option value="2">Great</option>
-          <option value="3">Nice Solution</option>
-          <option value="4">Awesome</option>
+          <option value="http">http://</option>
         </select>
       </div>
     </div>

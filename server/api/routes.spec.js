@@ -5,14 +5,14 @@ const request = require('supertest')
 const db = require('../db')
 const app = require('../index')
 const Website = db.model('website')
-const getHtmlArr = require('./functions')
+const getHtmlArr = require('./getHtmlArrFunc')
 
 describe('Search routes', () => {
   beforeEach(() => {
     return db.sync({force: true})
   })
 
-  describe('GET /api/surprise/', () => {
+  describe('GET /api/search/surprise/', () => {
     beforeEach(() => {
       return Promise.all([
         Website.create({url: 'www.nytimes.com'}),
@@ -32,7 +32,7 @@ describe('Search routes', () => {
 
     it('returns an object with keys html and url', async () => {
       const res = await request(app)
-        .get('/api/surprise')
+        .get('/api/search/surprise')
         .expect(200)
       expect(res.body)
         .to.be.an('object')
@@ -45,16 +45,16 @@ describe('Search routes', () => {
 
     it('it does not return the same source code with each request', async () => {
       const res1 = await request(app)
-        .get('/api/surprise')
+        .get('/api/search/surprise')
         .expect(200)
       const res2 = await request(app)
-        .get('/api/surprise')
+        .get('/api/search/surprise')
         .expect(200)
       const res3 = await request(app)
-        .get('/api/surprise')
+        .get('/api/search/surprise')
         .expect(200)
       const res4 = await request(app)
-        .get('/api/surprise')
+        .get('/api/search/surprise')
         .expect(200)
 
       expect(
@@ -64,13 +64,13 @@ describe('Search routes', () => {
       ).to.equal(true)
     })
   })
-  describe('GET /api/fetch/:protocol/:searchUrl', () => {
+  describe('GET /api/search/:protocol/:searchUrl', () => {
     it('returns an array of strings', async () => {
       const protocol = 'https'
       const searchUrl = 'www.google.com'
 
       const res = await request(app)
-        .get(`/api/fetch/${protocol}/${searchUrl}`)
+        .get(`/api/search/${protocol}/${searchUrl}`)
         .expect(200)
       expect(res.body)
         .to.be.an('array')
@@ -81,7 +81,7 @@ describe('Search routes', () => {
       const protocol = 'https'
       const searchUrl = 'www.fadjkfdsafjklafka.com'
       const res = await request(app)
-        .get(`/api/fetch/${protocol}/${searchUrl}`)
+        .get(`/api/search/${protocol}/${searchUrl}`)
         .expect(200)
       expect(res.text).to.equal('Invalid Url')
     })
@@ -90,12 +90,12 @@ describe('Search routes', () => {
       const protocol2 = 'https'
       const searchUrl = 'www.clairewatson.io'
       const res1 = await request(app)
-        .get(`/api/fetch/${protocol1}/${searchUrl}`)
+        .get(`/api/search/${protocol1}/${searchUrl}`)
         .expect(200)
       expect(res1.body).to.have.length.above(10)
 
       const res2 = await request(app).get(
-        `/api/fetch/${protocol2}/${searchUrl}`
+        `/api/search/${protocol2}/${searchUrl}`
       )
       expect(res2.text).to.equal('Invalid Url')
     })
