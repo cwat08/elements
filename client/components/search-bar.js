@@ -49,13 +49,16 @@ class Search extends Component {
               onChange={this.props.handleChange}
             />
 
-            {/* <button type="submit" onClick={this.props.handleSubmit}>
+            <button type="submit" onClick={this.props.handleSubmit}>
               Submit
-            </button> */}
+            </button>
           </form>
           {/* <Select /> */}
         </div>
-        {/* <form id="surprise-me-container">
+        {this.props.invalidSearch ? (
+          <div className="error-message">Please enter a valid url</div>
+        ) : null}
+        <form id="surprise-me-container">
           <button
             id="surprise-me"
             type="button"
@@ -63,7 +66,7 @@ class Search extends Component {
           >
             Surprise Me!
           </button>
-        </form> */}
+        </form>
       </div>
     )
   }

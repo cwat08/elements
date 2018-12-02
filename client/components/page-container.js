@@ -43,24 +43,31 @@ class PageContainer extends Component {
   }
 
   async handleSubmit(evt) {
-    evt.preventDefault()
-    const url = this.state.searchInput
-    const protocol = this.state.protocol
-    this.setState({invalidSearch: false, loading: true, html: []})
-    const results = await axios.get(`/api/fetch/${protocol}/${url}`)
-    if (results.data === 'error') {
-      this.setState({invalidSearch: true, loading: false})
-    } else {
-      this.setState({
-        html: results.data,
-        searchUrl: url,
-        searchInput: '',
-        activeTag: '',
-        loading: false
-      })
+    try {
+      evt.preventDefault()
+      if (!this.state.searchInput) {
+        this.setState({invalidSearch: true})
+      } else {
+        const url = this.state.searchInput
+        const protocol = this.state.protocol
+        this.setState({invalidSearch: false, loading: true, html: []})
+        const results = await axios.get(`/api/fetch/${protocol}/${url}`)
+        if (results.data === 'Invalid Url') {
+          this.setState({invalidSearch: true, loading: false})
+        } else {
+          this.setState({
+            html: results.data,
+            searchUrl: url,
+            searchInput: '',
+            activeTag: '',
+            loading: false
+          })
+        }
+      }
+    } catch (err) {
+      console.log(err.message)
     }
   }
-
   handleChange(evt) {
     this.setState({searchInput: evt.target.value})
   }
@@ -81,6 +88,7 @@ class PageContainer extends Component {
               searchInput={this.state.searchInput}
               handleSelect={this.handleSelect}
               handleSurprise={this.handleSurprise}
+              invalidSearch={this.state.invalidSearch}
             />
           </div>
           {/* <form id="surprise-me-container">
@@ -92,14 +100,15 @@ class PageContainer extends Component {
               Surprise Me!
             </button>
           </form> */}
-          {this.state.invalidSearch ? (
+          {/* {this.state.invalidSearch ? (
             <div className="error-message">Please enter a valid url</div>
-          ) : null}
+          ) : null} */}
         </div>
-        <Buttons
+        {/* <Buttons
           handleSubmit={this.handleSubmit}
           handleSurprise={this.handleSurprise}
-        />
+          handleKeyDown={this.handleKeyDown}
+        /> */}
 
         {this.state.loading ? <Loader /> : null}
         {this.state.html.length ? (

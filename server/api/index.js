@@ -1,16 +1,9 @@
 const router = require('express').Router()
 const axios = require('axios')
 const {Website} = require('../db/models')
-module.exports = router
+const getHtmlArr = require('./functions')
 
-const getHtmlArr = str => {
-  return str
-    .split('<')
-    .map(e => {
-      return `<${e}`
-    })
-    .slice(1)
-}
+module.exports = router
 
 //router.use('/users', require('./users'))
 router.get('/surprise', async (req, res, next) => {
@@ -33,14 +26,10 @@ router.get('/fetch/:protocol/:searchUrl', async (req, res, next) => {
         ? `https://${req.params.searchUrl}`
         : `http://${req.params.searchUrl}`
     )
-    if (results.data === null) {
-      res.send(null)
-    }
     const htmlArr = getHtmlArr(results.data)
     res.send(htmlArr)
   } catch (err) {
-    console.log(err.message)
-    res.send('error')
+    res.send('Invalid Url')
   }
 })
 

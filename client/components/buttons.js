@@ -4,14 +4,13 @@ const Buttons = props => {
   return (
     // <form id="surprise-me-container">
     <div id="buttons-container">
-      <form id="buttons-form">
-        <div>
+      <form id="buttons-form" onKeyDown={props.handleKeyDown}>
+        <div className="btn">
           <button id="surprise-me" type="button" onClick={props.handleSurprise}>
             Surprise Me!
           </button>
         </div>{' '}
-        */}
-        <div>
+        <div className="btn">
           <button id="submit" type="submit" onClick={props.handleSubmit}>
             Submit
           </button>
