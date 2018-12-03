@@ -5,7 +5,7 @@ const request = require('supertest')
 const db = require('../db')
 const app = require('../index')
 const Website = db.model('website')
-const getHtmlArr = require('./getHtmlArrFunc')
+const getHtmlArr = require('../getHtmlArrFunc')
 
 describe('Search routes', () => {
   beforeEach(() => {

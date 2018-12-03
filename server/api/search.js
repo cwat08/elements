@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const axios = require('axios')
 const {Website} = require('../db/models')
-const getHtmlArr = require('./getHtmlArrFunc')
+const getHtmlArr = require('../getHtmlArrFunc')
 
 module.exports = router
 
