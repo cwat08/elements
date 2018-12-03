@@ -23,8 +23,8 @@ class PageContainer extends Component {
     this.handleSurprise = this.handleSurprise.bind(this)
   }
 
-  async handleClick(evt) {
-    await this.setState({activeTag: evt.target.getAttribute('name')})
+  handleClick(evt) {
+    this.setState({activeTag: evt.target.getAttribute('name')})
   }
 
   async handleSurprise() {
@@ -72,13 +72,13 @@ class PageContainer extends Component {
     this.setState({searchInput: evt.target.value})
   }
 
-  async handleSelect(evt) {
-    await this.setState({protocol: evt.target.value})
+  handleSelect(evt) {
+    this.setState({protocol: evt.target.value})
   }
 
   render() {
     return (
-      <div id="page-container">
+      <div>
         <div>
           <SearchBar
             handleChange={this.handleChange}

@@ -7,7 +7,7 @@ module.exports = router
 
 router.get('/surprise', async (req, res, next) => {
   try {
-    const randomId = Math.floor(Math.random() * 12 + 1)
+    const randomId = Math.floor(Math.random() * 13 + 1)
     const site = await Website.findById(randomId)
     const results = await axios.get(`https://${site.url}`)
     const htmlArr = getHtmlArr(results.data)

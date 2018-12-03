@@ -3,7 +3,7 @@ import React from 'react'
 const Navbar = () => (
   <div className="nav-bar">
     <div className="app-title">
-      <h3 className="nav-item">{`<ELEMENTS>`}</h3>
+      <h3>{`<ELEMENTS>`}</h3>
     </div>
   </div>
 )

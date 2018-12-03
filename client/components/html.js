@@ -69,9 +69,9 @@ const Html = props => {
     } else {
       elementObj = getOpenTagObj(str, idx, a, elementObj)
     }
-    //check to see if it is an 'empty' tag (contains symbols or numbers).
+    //check to see if it is an 'empty' tag (contains symbols or numbers e.g. a part of a function that has < symbol).
     //if it's an 'empty' tag, give it the classname of previous tag
-    const regex = /[0-9]|[@$%^&*()_+\[\]{};:\\|,.\/?]/g
+    const regex = /[0-9]|[@$%^&*()=_+[\]{};:\\|,./?]/g
     if (elementObj.tag.search(regex) > -1 || elementObj.tag === '') {
       elementObj = getEmptyTagObj(elementObj)
     } else {
